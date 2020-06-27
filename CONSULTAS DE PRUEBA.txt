@@ -1,0 +1,29 @@
+INSERT INTO `solicitudes` (`N_solCDP`, `Objeto`, `Valor`, `Fuente`, `N_radicado`, `estado`, `Comentarios`, `cod_dep`) VALUES ('1', 'OBJETO 1', '1200000', '2', '20204205010006', '1', 'NO HAY MUCHO QUE DECIR', '718');
+
+INSERT INTO `solicitudes` (`N_solCDP`, `Objeto`, `Valor`, `Fuente`, `N_radicado`, `estado`, `Comentarios`, `cod_dep`) VALUES ('2', 'OBJETO 2', '1500000', '2', '20204205010007', '1', 'COMENTARIOS VARIOS', '718');
+
+INSERT INTO `solicitudes` (`N_solCDP`, `Objeto`, `Valor`, `Fuente`, `N_radicado`, `estado`, `Comentarios`, `cod_dep`) VALUES ('3', 'OBJETO 3', '1600000', '2', '20204205010008', '1', 'COMENTARIOS VARIOS', '200');
+
+INSERT INTO `solicitudes` (`N_solCDP`, `Objeto`, `Valor`, `Fuente`, `N_radicado`, `estado`, `Comentarios`, `cod_dep`) VALUES ('4', 'OBJETO 4', '1700000', '2', '20204205010009', '1', 'COMENTARIOS VARIOS', '200');
+
+
+
+INSERT INTO `cdps` (`id_cdp`, `fecha`, `codigo_rubro`, `tipo`, `observaciones`, `cod_solicitud`) VALUES ('3020', '2020-05-03', 'A02-02-02-1', '1', 'NO HAY OBSERVACIONES', '1');
+INSERT INTO `cdps` (`id_cdp`, `fecha`, `codigo_rubro`, `tipo`, `observaciones`, `cod_solicitud`) VALUES ('4020', '2020-03-03', 'A02-02-02-2', '1', 'OBSERVACIONES', '2');
+INSERT INTO `cdps` (`id_cdp`, `fecha`, `codigo_rubro`, `tipo`, `observaciones`, `cod_solicitud`) VALUES ('5020', '2020-04-04', 'A02-02-02-3', '1', 'NO HAY ', '3');
+INSERT INTO `cdps` (`id_cdp`, `fecha`, `codigo_rubro`, `tipo`, `observaciones`, `cod_solicitud`) VALUES ('6020', '2020-05-06', 'A02-02-02-4', '1', 'NO ', '1');
+
+UPDATE `solicitudes` SET `estado` = '2' WHERE `solicitudes`.`N_solCDP` = 1;
+
+
+use App\solicitud;
+
+
+Route::get('/', function () {
+
+	$sol = solicitud::all();
+	foreach ($sol as $solicitud ) {
+		# code...
+		echo $solicitud->Objeto.'<br/>';
+		echo $solicitud->cdp->Objeto.'<br/>';
+	}
