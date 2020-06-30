@@ -17,8 +17,29 @@ Route::get('/', function () {
 	return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
+// Registration Routes...
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('registro');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
+/*
+// Authentication Routes...
+Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+ 
+
+ 
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+ 
+// Email Verification Routes...
+Route::emailVerification();
+*/
+ 
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -179,6 +200,12 @@ Route::get('/mostrarCon/{id}', array(
 	'as'=>'mostrarCo',
 	'middleware'=>'auth',
 	'uses'=>'ContratoController@detalleCon'
+));
+
+Route::get('/mostrarPerC/{id}', array(
+	'as'=>'mostrarPerC',
+	'middleware'=>'auth',
+	'uses'=>'ContratoController@detalleConP'
 ));
 
 Route::get('/buscarCon/{seacrh?}', array(
@@ -351,3 +378,59 @@ Route::post('/updatePago/{id}', array(
 	'middleware'=>'auth',
 	'uses'=>'PagoController@actualizaPago'
 ));
+
+//las de los reportes
+
+Route::get('/gestionar-report/{opc?}', array(
+	'as'=>'gestionarReport',
+	'middleware'=>'auth',
+	'uses'=>'ReporteController@gestionarReporte'
+));
+
+
+//REPORTES GENERALES
+Route::get('/export', array(
+	'as'=>'exportCon',
+	'uses'=> 'ReporteController@export'
+	));
+
+Route::get('/adj', array(
+	'as'=>'exportadj',
+	'uses'=> 'ReporteController@adjudicados'
+	));
+
+Route::get('/exportPer', array(
+	'as'=>'exportPer',
+	'uses'=> 'ReporteController@personas'
+	));
+
+Route::get('/export_ig', array(
+	'as'=>'export_ig',
+	'uses'=> 'ReporteController@export_ig'
+	));
+
+Route::get('/export_maa', array(
+	'as'=>'export_maa',
+	'uses'=> 'ReporteController@export_maa'
+	));
+
+//REPORTES DE AUDITORIA
+Route::get('/export_maa', array(
+	'as'=>'export_maa',
+	'uses'=> 'ReporteController@export_maa'
+	));
+
+Route::get('/export_ep', array(
+	'as'=>'export_ep',
+	'uses'=> 'ReporteController@export_ep'
+	));
+
+Route::get('/export_gar', array(
+	'as'=>'export_gar',
+	'uses'=> 'ReporteController@export_gar'
+	));
+
+Route::get('/export_pagos', array(
+	'as'=>'export_pagos',
+	'uses'=> 'ReporteController@export_pagos'
+	));

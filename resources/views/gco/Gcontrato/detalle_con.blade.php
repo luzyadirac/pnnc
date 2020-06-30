@@ -14,6 +14,7 @@
 				<div class="card-body">
 					@if(isset($solicitud ))
 					<ul class="list-group">
+						<li class="list-group-item">Contratista: {{$solicitud->contratista}}</li>
 						<li class="list-group-item">Fecha de Suscripción: {{$solicitud->f_susc}}</li>
 					    <li class="list-group-item">Clase: {{$solicitud->clase}}</li>
 					    <li class="list-group-item">Fuente: 

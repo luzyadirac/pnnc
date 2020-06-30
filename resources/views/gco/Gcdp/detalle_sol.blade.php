@@ -24,7 +24,7 @@
 					    </li>
 					    <li class="list-group-item">Valor: {{$solicitud->Valor}} </li>
 					    <li class="list-group-item">Expediente: {{$solicitud->N_radicado}}</li>
-					    <li class="list-group-item">Dependencia:{{$solicitud->cod_dep}}</li>
+					    <li class="list-group-item">Dependencia:{{$solicitud->depen->nombre}}</li>
 					    <li class="list-group-item">Estado: 
 					    	@if($solicitud->estado == 1)
 					    	Sin Asignar a CDP

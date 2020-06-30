@@ -13,7 +13,7 @@
                         <tr>                        
                             <th class="text-center">Documento de Contratista</th>
                             <th class="text-center">Nombres</th>
-                            <th class="text-center">Correo institucional</th>
+                            <th class="text-center">Estado</th>
                             <th class="text-center">Profesión</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -24,7 +24,15 @@
                             <tr>
                               <td class="text-center">{{$result->documento}}</td>
                               <td class="text-center">{{ $result->Nombres}}</td>
-                              <td class="text-center">{{ $result->correo_I}}</td>
+                              <td class="text-center">
+                                @if($result->estado == 10)
+                                Sin asignar Contrato 
+                                @elseif($result->estado == 20)
+                                Con contrato Vigente
+                                @else
+                                Inactivo
+                                @endif
+                              </td>
                               <td class="text-center">{{ $result->profesion  }}</td>
                               <td><a href="{{route('mostrarPer',['id'=>$result->documento])}}" class="btn btn-outline-info">Seleccionar</a></td>
                             </tr>

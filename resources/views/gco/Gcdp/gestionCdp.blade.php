@@ -57,8 +57,9 @@
                       </thead>
                       <tbody>
                         <div id="listado">
+
                           @foreach($solicitudes as $solicitud)
-                             
+  
                             <tr>
                               <td class="text-center">{{$solicitud->N_solCDP}}</td>
                               @if($solicitud->Fuente==1)

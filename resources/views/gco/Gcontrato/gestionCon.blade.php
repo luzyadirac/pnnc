@@ -26,7 +26,7 @@
                             <label>Buscar por:</label>
                             <select name="criterio">
                               <option value="num_cto">Numero de Contrato</option>
-                              <option value="supervisor">Supervisor</option>
+                              <option value="supervisor">Contratista</option>
                               <option value="clase">Clase</option>
                             </select>
                           </span>
@@ -51,7 +51,7 @@
                       <thead>
                         <tr>
                             <th class="text-center">Numero de Contrato</th>
-                            <th class="text-center">Supervisor</th>
+                            <th class="text-center">Contratista</th>
                             <th class="text-center">Clase de Contrato</th>
                             <th class="text-center">Acciones</th>
                         </tr>
@@ -61,7 +61,7 @@
                           @foreach($rtas as $pro)                             
                             <tr>
                               <td class="text-center">{{ $pro->num_cto}}</td>
-                              <td class="text-center">{{ $pro->supervisor}}</td>
+                              <td class="text-center">{{ $pro->contratista}}</td>
                               <td class="text-center">{{ $pro->clase}}</td>
                               @if(Auth::user()->role == "Admin")
                               <td class="text-center">

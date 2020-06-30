@@ -20,7 +20,7 @@
                         </div>
                     @endif
                    
-                    <form method="GET" role="search" action="/buscaPago">
+                    <form method="GET" role="search" action="/buscarPago">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
@@ -69,10 +69,10 @@
                               @if(Auth::user()->role == "Admin")
                               <td class="text-center">
                               <!-- Botón en HTML (lanza el modal en Bootstrap) -->
-                                  <a href="#victorModal{{$pro->num_proceso}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
+                                  <a href="#victorModal{{$pro->id_pago}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
                                     
                                   <!-- Modal / Ventana / Overlay en HTML -->
-                                  <div id="victorModal{{$pro->num_proceso}}" class="modal fade">
+                                  <div id="victorModal{{$pro->id_pago}}" class="modal fade">
                                       <div class="modal-dialog">
                                           <div class="modal-content">
                                               <div class="modal-header">
@@ -80,7 +80,7 @@
                                                   <h4 class="modal-title">¿Estás seguro?</h4>
                                               </div>
                                               <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->num_proceso}}?</p>
+                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->id_pago}}?</p>
                                                   <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
                                               </div>
                                               <div class="modal-footer">

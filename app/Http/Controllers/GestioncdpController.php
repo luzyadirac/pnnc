@@ -16,12 +16,14 @@ class GestioncdpController extends Controller
 
 //Gestion de solicitudes y CDPs
     public function gestionarCdp(){
+        
+
         $solicitudes = solicitud::where('estado','LIKE','1')->paginate(5);
-        
-        
         $certificados = DB::table('cdps')
                             ->orderBy('updated_at')
                             ->get();
+
+    
 
         return view('gco.Gcdp.gestionCdp', array(
             'solicitudes'=>$solicitudes,

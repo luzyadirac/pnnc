@@ -10,6 +10,10 @@ class dependencia extends Model
 	protected $table = 'dependencias';
 
     public function dependencias(){
-    	return $this->hasMany('App\solicitudes')
+    	return $this->hasMany('App\solicitud')
+    }
+
+    public function dependencias(){
+    	return $this->hasMany('App\contrato')
     }
 }

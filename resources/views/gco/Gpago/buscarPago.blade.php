@@ -25,7 +25,7 @@
                               <td class="text-center">{{$result->id_pago}}</td>
                               <td class="text-center">{{ $result->f_pago}}</td>
                               <td class="text-center">{{ $result->valor_pago}}</td>
-                              <td class="text-center">{{ $result->icod_contrato  }}</td>
+                              <td class="text-center">{{ $result->cod_contrato  }}</td>
                               <td><a href="{{route('mostrarPago',['id'=>$result->id_pago])}}" class="btn btn-outline-info">Seleccionar</a></td>
                             </tr>
                           @endforeach

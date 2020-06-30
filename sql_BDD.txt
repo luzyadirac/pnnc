@@ -291,7 +291,7 @@ CREATE TABLE `contratos`(
 	`valor_mes` DOUBLE UNSIGNED NOT NULL , 
 	`valor_total` DOUBLE UNSIGNED NOT NULL , 
 	`obs_pago` TEXT NOT NULL ,
-	`cod_dep` INT(6) NOT NULL , 
+	`cod_dep` TEXT NOT NULL , 
 	`plazo` INT(255) NOT NULL , 
 	`f_ini` DATE NULL , 
 	`f_fin` DATE NULL , 
@@ -305,8 +305,7 @@ CREATE TABLE `contratos`(
     `cod_maa` INT(255) NOT NULL , 
     `cod_nivel` INT(255) NOT NULL ,     	
 	PRIMARY KEY (`id`),
-    CONSTRAINT `fk_contratos_dependencias` FOREIGN KEY (`cod_dep`) REFERENCES `dependencias`(`id_dep`) ,    
-	CONSTRAINT `fk_contratos_procesos` FOREIGN KEY (`cod_proceso`) REFERENCES `procesos`(`id_proceso`) ,
+    CONSTRAINT `fk_contratos_procesos` FOREIGN KEY (`cod_proceso`) REFERENCES `procesos`(`id_proceso`) ,
     CONSTRAINT `fk_contratos_maas` FOREIGN KEY (`cod_maa`) REFERENCES `maas`(`id_maa`) ,
     CONSTRAINT `fk_contratos_niveles` FOREIGN KEY (`cod_nivel`) REFERENCES `niveles`(`id_nivel`) 
 	) ENGINE = InnoDB;

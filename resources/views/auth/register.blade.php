@@ -8,6 +8,10 @@
                 <div class="card-header">{{ __('Registrar') }}</div>
 
                 <div class="card-body">
+
+                    @if(!is_null(Auth::user()))
+                    
+                    @if(Auth::user()->role=='Admin')
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -83,6 +87,12 @@
                             </div>
                         </div>
                     </form>
+                    @else
+                    Este usuario no puede crear registros
+                    @endif
+                    @else
+                    No puede crear registros sin iniciara sesión
+                    @endif
                 </div>
             </div>
         </div>

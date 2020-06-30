@@ -86,7 +86,7 @@ class ContratoController extends Controller
             ->update(['estado' => 200]);
 
         DB::table('personas')
-            ->where('documeto', $request->input('contra'))
+            ->where('documento', $request->input('contra'))
             ->update(['estado' => 20]);
 
     	$cont->save();
@@ -134,6 +134,18 @@ class ContratoController extends Controller
         return view('gco.Gcontrato.detalle_con',array(
             'solicitud'=> $Solicitud,
             'registros'=> $registros
+        ));
+    }
+
+    public function detalleConP($id_per){
+            
+        $Solicitud = contrato::where('contratista','LIKE',$id_per)->first();
+
+        $registros = rp::where('id_contrato','LIKE',$Solicitud->id)->paginate(5);
+
+        return view('gco.Gcontrato.detalle_con',array(
+            'solicitud'=> $Solicitud,
+            'registros'=> $registros 
         ));
     }
 

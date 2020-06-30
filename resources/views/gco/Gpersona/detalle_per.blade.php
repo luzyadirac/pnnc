@@ -23,7 +23,7 @@
                                 Sin asignar Contrato 
                                 @elseif($solicitud->estado == 20)
                                 Con contrato Vigente
-                                <a href="{{route('mostrarPer',['id'=>$pro->id_persona])}}" class="btn btn-outline-info">Ver Contrato</a>
+                                <a href="{{route('mostrarPerC',['id'=>$solicitud->documento])}}" class="btn btn-outline-info">Ver Contrato</a>
                                 @else
                                 Inactivo
                                 @endif

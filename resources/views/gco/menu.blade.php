@@ -34,7 +34,7 @@
           </div>
           <div class="card" >
             <div class="card-body">
-              <a href="{{ url('/crear-persona') }}" target="formularios" accesskey="5" title="">Gestión de Reportes</a>
+              <a href="{{ url('/gestionar-report/1') }}" target="formularios" accesskey="5" title="">Gestión de Reportes</a>
             </div>
           </div>
       </ul>

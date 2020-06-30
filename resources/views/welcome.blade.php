@@ -73,7 +73,7 @@
                         <a href="{{ route('login') }}">Iniciar sesión</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Registrar usuarios</a>
+                           <!-- <a href="{{ route('register') }}">Registrar usuarios</a>-->
                         @endif
                     @endauth
                 </div>
@@ -82,7 +82,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     <div class="image_ppal col-md-4" >
-                        <img src="/image/pic02.jpg"  width="200px" height="250px">
+                        <img src="{{URL::asset('image/pic02.jpg')}}"  width="200px" height="250px">
                     </div>
 
                    Sistema para la Gestión de la información Contractual - 
