@@ -16,9 +16,7 @@
 					</ul>
 				</div>
 				@endif
-				<div class="form-group">
-					<a href="{{url('/gestionar-per')}}" >Ver Garantías</a>
-				</div>
+		
 				<div class="form-group">
 					<label for="numero">Numero de Garantía</label>
 					<input type="text" class="form-control" id="ngar" name="ngar" value="{{old('ngar')}}"  />	
@@ -43,7 +41,13 @@
 
 				<div class="form-group">
 					<label for="fuente">Contrato</label>
-					<input type="text" class="form-control" id="cto" name="cto" value="{{old('cto')}}"/>
+					<select class="form-control" id="cto" name="cto" value="{{old('cto')}}">
+							<option value="NULL">(Seleccionar)</option>
+							@foreach($rta as $sol)
+							<option value={{$sol->num_cto}}>{{$sol->num_cto}}</option>
+							@endforeach						
+						</select>
+	
 				</div>
 				
 				<div class="form-group">

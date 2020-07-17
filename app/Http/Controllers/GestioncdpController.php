@@ -20,10 +20,11 @@ class GestioncdpController extends Controller
 
         $solicitudes = solicitud::where('estado','LIKE','1')->paginate(5);
         $certificados = DB::table('cdps')
-                            ->orderBy('updated_at')
+            ->join('procesos', 'procesos.cod_cdp', '=', 'cdps.id_cdp')
+            ->select('cdps.id_cdp','cdps.fecha', 'cdps.cod_solicitud','procesos.cod_cdp',
+                'procesos.num_proceso','procesos.estado')
+                            ->orderBy('cod_cdp')
                             ->get();
-
-    
 
         return view('gco.Gcdp.gestionCdp', array(
             'solicitudes'=>$solicitudes,

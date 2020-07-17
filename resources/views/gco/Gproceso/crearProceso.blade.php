@@ -17,12 +17,17 @@
 				</div>
 				@endif
 				<div class="form-group">
+					<label for="anuncio">Recuerde que el número de proceso: </label>
+					<label for="anuncio"><b>Modalidad - Área protegida - consecutivo - año vigencia </b></label>
+				</div>
+				<div class="form-group">
 					<label for="objeto">Numero de proceso</label>
-					<input type="text" class="form-data" id="Nproceso" name="Nproceso" value="{{old('Nproceso')}}" />
+					<input type="text" class="form-data" id="Numero_proceso" name="Numero_proceso" value="{{old('Numero_proceso')}}" placeholder="Ejemplo: CD-NC-0**-2020" />
 				</div>
 				<div class="form-group">
 					<label for="fuente">Modalidad</label>
 					<select class="form-control" id="modalidad" name="modalidad">
+						<option value=0>(Seleccionar)</option>
 						<option value=100>CONCURSO DE MÉRITOS ABIERTO</option>
 						<option value=200>CONTRATACIÓN DIRECTA</option>
 						<option value=300>LICITACIÓN PÚBLICA</option>
@@ -36,16 +41,17 @@
 				<div class="form-group">
 					<label for="valor">Abogado</label>
 					<select class="form-control" id="abogado" name="abogado">
-					    <option value=1016071808>Camila Barrantes</option>
-						<option value=26421443>Leidy Serrano</option>
-						<option value=51717059>Lila Zabaraín</option>
-						<option value=51760900>Liliana Murillo</option>
-						<option value=79906334>Luis Alberto Villamil</option>
-						<option value=51889049>Luz Janeth Villalba</option>
-						<option value=93414563>Mauricio Villegas</option>
-						<option value=43035809>Martha Lopez</option>
-						<option value=80073591>Nelson Cadena</option>
-						<option value=1015394967>Catalina Peña</option>						
+						<option value=0>(Seleccionar)</option>
+					    <option value="Camila Barrantes">Camila Barrantes</option>
+						<option value="Leidy Serrano">Leidy Serrano</option>
+						<option value="Lila Zabaraín">Lila Zabaraín</option>
+						<option value="Liliana Murillo">Liliana Murillo</option>
+						<option value="Luis Alberto Villamil">Luis Alberto Villamil</option>
+						<option value="Luz Janeth Villalba">Luz Janeth Villalba</option>
+						<option value="Mauricio Villegas">Mauricio Villegas</option>
+						<option value="Martha Lopez">Martha Lopez</option>
+						<option value="Nelson Cadena">Nelson Cadena</option>
+						<option value="Catalina Peña">Catalina Peña</option>						
 				</select>
 				</div>
 				<div class="form-group">
@@ -58,13 +64,14 @@
 				</div>
 
 				<div class="form-group">					
-					<label for="Ndp">CDP</label>
-					<input type="text" class="form-control" id="Ncdp" name="Ncdp" value="{{old('Ncdp')}}"/>
+					<label for="Numero_dp">CDP</label>
+					<input type="text" class="form-control" id="Numero_cdp" name="Numero_cdp" value="{{old('Numero_cdp')}}"/>
 					<a href="{{ url('/buscarA')}}">Ver CDPs</a>
 				</div>
 				<div class="form-group">
 					<label for="comentarios">Estado</label>
 					<select class="form-control" id="estado" name="estado">
+						<option value=0>(Seleccionar)</option>
 						<option value=999>Asignado / pendiente</option>
 						<option value=100>Creado / publicado</option>
 						<option value=200>Adjudicado</option>

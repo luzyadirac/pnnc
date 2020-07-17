@@ -18,9 +18,11 @@ class maaExport implements FromCollection, WithHeadings
     {
 
         $solicitudes = DB::table('contratos')
+            ->join('personas', 'contratos.contratista', '=', 'personas.documento')
             ->orderBy('cod_maa')
-            ->select('num_cto','valor_mes','cod_dep','observaciones','link')
+            ->select('personas.Nombres','personas.Apellidos','contratos.num_cto','contratos.valor_mes','contratos.cod_dep','contratos.cod_maa')
             ->get();
+
 
         return $solicitudes;
     }
@@ -28,12 +30,12 @@ class maaExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Nombres',
+            'Apellidos',
             'Numero de contrato',
             'valor mensual',
             'Dependencia',
-            'Correo personal',
-            'Observaciones',
-            'Link'
+            'maa'
         ];
     }
 }

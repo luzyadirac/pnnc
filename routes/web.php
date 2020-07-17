@@ -81,7 +81,7 @@ Route::post('/updateS/{id_sol}', array(
 	'uses'=>'GestioncdpController@actualizaSol'
 ));
 
-//Rutas de CDP
+//Rutas de CDP 
 
 Route::get('/crear-cdp/{ident?}', array(
 	'as'=>'crearCdp',
@@ -101,7 +101,7 @@ Route::get('/gestionar-cdp', array(
 	'uses'=>'GestioncdpController@gestionarCdp'
 ));
 
-Route::get('/buscarC/{seacrh?}', array(
+Route::get('/buscarC/{search?}', array(
 	'as'=>'buscarCdp',
 	'middleware'=>'auth',
 	'uses'=>'GestioncdpController@buscarCdp'
@@ -238,6 +238,12 @@ Route::post('/guardar-rp', array(
 	'uses'=>'ContratoController@guardarRp'
 ));
 
+Route::get('/buscarconPago', array(
+	'as'=>'buscarconPago',
+	'middleware'=>'auth',
+	'uses'=>'PagoController@buscarconPago'
+));
+
 //rutas de Persona
 Route::get('/crear-persona', array(
 	'as'=>'crearPersona',
@@ -336,11 +342,22 @@ Route::post('/updateGar/{id}', array(
 	'uses'=>'GarantiaController@actualizaGarantia'
 ));
 
+Route::get('/borraGar/{id}', array(
+	'as'=> 'borraGar',
+	'middleware'=>'auth',
+	'uses'=>'GarantiaController@borraGar'
+));
 //rutas de pago
 Route::get('/crear-pago', array(
 	'as'=>'crearpago',
 	'middleware'=>'auth',
 	'uses'=>'PagoController@crearPago'
+));
+
+Route::get('/crearPago2/{search?},{saldo?}', array(
+	'as'=>'crearPago2',
+	'middleware'=>'auth',
+	'uses'=>'PagoController@crearPago2'
 ));
 
 Route::post('/guardar-pago', array(
@@ -377,6 +394,12 @@ Route::post('/updatePago/{id}', array(
 	'as'=> 'updatePago',
 	'middleware'=>'auth',
 	'uses'=>'PagoController@actualizaPago'
+));
+
+Route::get('/borraPago/{id}', array(
+	'as'=> 'borraPago',
+	'middleware'=>'auth',
+	'uses'=>'PagoController@borraPago'
 ));
 
 //las de los reportes

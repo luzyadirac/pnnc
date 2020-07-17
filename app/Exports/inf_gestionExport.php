@@ -6,6 +6,8 @@ use App\Contrato;
 use Illuminate\Support\Facades\DB;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
 
 class inf_gestionExport implements FromCollection,WithHeadings
 {

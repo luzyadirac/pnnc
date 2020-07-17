@@ -38,7 +38,9 @@
                         </button>
                     </form>
                     <hr />
+                     @if(Auth::user()->role=='Admin'||Auth::user()->role=='Ages' )
                       <li><a href="{{route('crearContrato',['null'])}}">Crear Contrato</a></li>
+                      @endif
                   </div>
                 </div>
               </div>
@@ -62,36 +64,9 @@
                             <tr>
                               <td class="text-center">{{ $pro->num_cto}}</td>
                               <td class="text-center">{{ $pro->contratista}}</td>
-                              <td class="text-center">{{ $pro->clase}}</td>
-                              @if(Auth::user()->role == "Admin")
+                              <td class="text-center">{{ $pro->clase}}</td>                                                                          
                               <td class="text-center">
-                              <!-- Botón en HTML (lanza el modal en Bootstrap) -->
-                                  <a href="#victorModal{{$pro->num_proceso}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
-                                    
-                                  <!-- Modal / Ventana / Overlay en HTML -->
-                                  <div id="victorModal{{$pro->num_proceso}}" class="modal fade">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                  <h4 class="modal-title">¿Estás seguro?</h4>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->num_proceso}}?</p>
-                                                  <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                 <a href="{{route('mostrarCo',['id'=>$pro->id])}}" class="btn btn-outline-info">Ver</td>
-                              @else
-                                <td class="text-center">
-                                   <a href="{{route('mostrarCo',['id'=>$pro->id])}}" class="btn btn-outline-info">Ver</td>
-                              @endif
+                                   <a href="{{route('mostrarCo',['id'=>$pro->id])}}" class="btn btn-outline-info">Ver</td>           
 
                             </tr>
                           @endforeach
@@ -104,6 +79,9 @@
                 </div>
             </div>
         
-    </div>    
+    </div> 
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>   
  </div>
 @endsection

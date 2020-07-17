@@ -36,11 +36,10 @@ class GarExport implements FromCollection, WithHeadings
             'Fecha de expedición',
             'Numero de anexo',
             'Numero de aprobación',
-            'Contrato',
             'Numero de contrato',
             'Observaciones',
-            'fecha de creacion',
             'última actualización',
+            'fecha de creacion',
             'Dependencia',
             'Link'
         ];

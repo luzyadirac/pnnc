@@ -18,7 +18,7 @@
 				@endif
 				<div class="form-group">
 					<label for="objeto">Numero de CDP</label>
-					<input type="number" class="form-control" id="Ncdp" name="Ncdp" value="{{old('Ncdp')}}"  />
+					<input type="number" class="form-control" id="Numero_cdp" name="Numero_cdp" value="{{old('Numero_cdp')}}"  />
 					
 				</div>
 				<div class="form-group">
@@ -45,10 +45,11 @@
 					<label for="dep">Solicitud </label>
 
 					@if(isset($ident))
-						<input type="text" class="form-control" id="Nsol" name="Nsol" value={{$ident->N_solCDP}} />
+						<input type="hidden" id="Numero_solicitud" name="Numero_solicitud" value={{$ident}} />
+						<label for="Numero_solicitud"> <b>__{{$ident}}</b></label>
 					@else
-						<select class="form-control" id="Nsol" name="Nsol" value="{{old('Nsol')}}">
-							<option value=null>(Seleccionar)</option>
+						<select class="form-control" id="Numero_solicitud" name="Numero_solicitud" value="{{old('Numero_solicitud')}}">
+							<option value=0>(Seleccionar)</option>
 							@foreach($solicitudes as $sol)
 							<option value={{$sol->N_solCDP}}>{{$sol->N_solCDP}}</option>
 							@endforeach						

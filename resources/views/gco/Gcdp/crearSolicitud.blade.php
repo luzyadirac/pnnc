@@ -23,6 +23,7 @@
 				<div class="form-group">
 					<label for="fuente">Fuente</label>
 					<select class="form-control" id="fuente" name="fuente" value="{{old('fuente')}}">
+						<option value=0>(Seleccionar)</option>
 						<option value=1>FONAM</option>
 						<option value=2>NACIÓN</option>
 					</select>
@@ -33,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label for="nsol">Numero de solicitud</label>
-					<input type="text" class="form-control" id="nsol" name="nsol" value="{{old('nsol')}}"/>
+					<input type="text" class="form-control" id="Numero_solicitud" name="Numero_solicitud" value="{{old('Numero_solicitud')}}"/>
 				</div>
 				<div class="form-group">
 					<label for="exp">Expediente</label>
@@ -42,7 +43,8 @@
 
 				<div class="form-group">
 					<label for="dep">Dependencia</label>
-					<select class="form-control" id="dep" name="dep" value="{{old('dep')}}">
+					<select class="form-control" id="dependencia" name="dependencia" value="{{old('dependencia')}}">
+						<option value=0>(Seleccionar)</option>
 						@foreach($areasP as $area)
 						<option value={{$area->id_dep}}>{{$area->nombre}}</option>
 						@endforeach						

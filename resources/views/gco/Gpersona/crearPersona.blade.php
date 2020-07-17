@@ -65,7 +65,7 @@
 
 				<div class="form-group">
 					<label for="exp">Profesión</label>
-					<input type="text" class="form-control" id="profesion" name="profesion" value="{{old('profesion')}}" placeholder="ENTERO 100" />
+					<input type="text" class="form-control" id="profesion" name="profesion" value="{{old('profesion')}}" placeholder="Registre el título que tiene la persona" />
 				</div>
 				<div class="form-group">
 					<label for="formacion">Formación</label>

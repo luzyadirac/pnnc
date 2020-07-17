@@ -20,12 +20,12 @@
                         </div>
                     @endif
                    
-                    <form method="GET" role="search" action="/buscarPago">
+                    <form method="GET" role="search" action="{{url('/buscarPago')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
                             <select name="criterio">
-                              <option value="f_pago">fecha pago</option>
+                              <option value="f_pago">Fecha pago</option>
                               <option value="cod_contrato">Contrato</option>
                             </select>
                           </span>
@@ -37,7 +37,9 @@
                         </button>
                     </form>
                     <hr />
+                     @if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' )
                       <li><a href="{{url('/crear-pago')}}">Crear Pago</a></li>
+                      @endif
                   </div>
                 </div>
               </div>
@@ -80,12 +82,12 @@
                                                   <h4 class="modal-title">¿Estás seguro?</h4>
                                               </div>
                                               <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->id_pago}}?</p>
+                                                  <p>¿Seguro que quieres borrar el pago {{$pro->id_pago}}?</p>
                                                   <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
+                                                  <a href="{{url('/borraPago/'.$pro->id_pago)}}" type="button" class="btn-danger">Eliminar</button>
                                               </div>
                                           </div>
                                       </div>
@@ -108,5 +110,8 @@
             </div>
         
     </div>    
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>
  </div>
 @endsection

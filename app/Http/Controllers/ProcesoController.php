@@ -18,27 +18,27 @@ class ProcesoController extends Controller
     public function guardarProceso(Request $request){
     	//validar formulario
     	$validaInfo = $this->validate($request, [
-    	'Nproceso' => 'required',
-    	'modalidad' => 'required',
-    	'abogado' => 'required',
-    	'Ncdp' => 'required|min:4'    	
+    	'Numero_proceso' => 'required',
+    	'modalidad' => 'required|not_in:0',
+    	'abogado' => 'required|not_in:0',
+    	'Numero_cdp' => 'required|min:4'    	
     	]);
 
     	$proc = new proceso();
     	$user = \Auth::user();
 
-    	$proc->num_proceso=  $request->input('Nproceso');
+    	$proc->num_proceso=  $request->input('Numero_proceso');
     	$proc->modalidad =  $request->input('modalidad');
     	$proc->abogado = $request->input('abogado');
      	$proc->f_reparto = $request->input('freparto');
     	$proc->link = $request->input('enlace');
-    	$proc->cod_cdp = $request->input('Ncdp');
+    	$proc->cod_cdp = $request->input('Numero_cdp');
 		$proc->estado = $request->input('estado');
 
 
     	$proc->save();
 
-    	return redirect()->route('home')->with(array(
+    	return redirect()->route('gestionarProc')->with(array(
     		'message' => 'El proceso se creó correctamente!!'
     	));
     }
@@ -100,7 +100,7 @@ class ProcesoController extends Controller
 
         $sol->update();
 
-        return redirect()->route('home')->with(array('message'=>'El proceso se actualizó correctamente!!!'));
+        return redirect()->route('gestionarProc')->with(array('message'=>'El proceso se actualizó correctamente!!!'));
 
     }
 

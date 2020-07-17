@@ -19,9 +19,9 @@
                         <div class="alert alert-success">
                             {{ session('message') }}
                         </div>
-                    @endif
+                    @endif 
                    
-                    <form method="GET" role="search" action="/buscarP">
+                    <form method="GET" role="search" action="{{url('/buscarP/')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
@@ -66,35 +66,8 @@
                               <td class="text-center">{{ $pro->num_proceso}}</td>
                               <td class="text-center">{{ $pro->modalidad}}</td>
                               <td class="text-center">{{ $pro->abogado}}</td>
-                              @if(Auth::user()->role == "Admin")
-                              <td class="text-center">
-                              <!-- Botón en HTML (lanza el modal en Bootstrap) -->
-                                  <a href="#victorModal{{$pro->num_proceso}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
-                                    
-                                  <!-- Modal / Ventana / Overlay en HTML -->
-                                  <div id="victorModal{{$pro->num_proceso}}" class="modal fade">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                  <h4 class="modal-title">¿Estás seguro?</h4>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->num_proceso}}?</p>
-                                                  <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                 <a href="{{route('mostrarP',['id'=>$pro->num_proceso])}}" class="btn btn-outline-info">Ver</td>
-                              @else
                                 <td class="text-center">
                                    <a href="{{route('mostrarP',['id'=>$pro->num_proceso])}}" class="btn btn-outline-info">Ver</td>
-                              @endif
 
                             </tr>
                           @endforeach
@@ -114,6 +87,9 @@
                 </div>
             </div>
         
-    </div>    
+    </div>   
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div> 
  </div>
 @endsection

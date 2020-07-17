@@ -34,7 +34,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">                  </ul>
                            
-                     <a href="{{url('/home')}}">Inicio</a>
+                     <a href="{{url('/home')}}">Página principal</a>
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

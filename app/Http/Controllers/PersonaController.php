@@ -59,7 +59,7 @@ class PersonaController extends Controller
     	
     	$per->save();
 
-    	return redirect()->route('home')->with(array(
+    	return redirect()->route('gestionarPer')->with(array(
     		'message' => 'El contratista se creó correctamente!!'
     	)); 
 
@@ -153,7 +153,7 @@ class PersonaController extends Controller
 
         $sol->update();
 
-        return redirect()->route('home')->with(array('message'=>'El contratista  se actualizó correctamente!!!'));
+        return redirect()->route('gestionarPer')->with(array('message'=>'El contratista  se actualizó correctamente!!!'));
 
     }
 }

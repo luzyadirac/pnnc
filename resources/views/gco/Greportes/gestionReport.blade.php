@@ -45,5 +45,8 @@
             </div>
         
     </div>    
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>
  </div>
 @endsection

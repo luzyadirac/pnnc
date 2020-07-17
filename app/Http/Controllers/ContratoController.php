@@ -29,69 +29,82 @@ class ContratoController extends Controller
                     ->where('documento', $id)                   
                     ->get();
 
+        $supervisores = DB::table('personas')
+                    ->where('clase', 'Funcionario')                   
+                    ->get();
+
     	return view('gco.Gcontrato.crearContrato',array(
             'areasP'=>$areasP,
             'procesos'=>$procesos,
-            'per'=>$per
+            'per'=>$per,
+            'supervisores'=>$supervisores
         ));
     }
+
 
     public function guardarContrato(Request $request){
     	//validar formulario
 
     	$validaInfo = $this->validate($request, [
-    	'Ncto' => 'required|min:12,unique:contratos,num_cto',
-    	'f_susc' => 'required|date',
-    	'clase' => 'required',
-    	'v_mes' => 'required|min:0',
-    	'v_total' => 'required',
-    	'depe' => 'required',
-    	'f_ini' => 'required|date',
-    	'f_ter' => 'required|date|after:f_susc',
+    	'Numero_cto' => 'required|min:12|unique:contratos,num_cto',
+    	'fecha_suscripcion' => 'required|date',
+    	'clase' => 'required|not_in:0',
+    	'valor_mensual' => 'required|min:0',
+    	'valor_total' => 'required',
+    	'dependencia' => 'required|not_in:0',
+    	'fecha_inicio' => 'required|date|after_or_equal:fecha_suscripcion',
+    	'fecha_terminacion' => 'required|date|after_or_equal:fecha_suscripcion|after_or_equal:fecha_inicio',
     	'plazo' => 'required|integer',
-    	'super' => 'required',
-    	'cproceso' => 'required',
-    	'cmaa' => 'required',
+    	'supervisor' => 'required|not_in:0',
+    	'numero_proceso' => 'required|not_in:0',
+    	'cmaa' => 'required|not_in:0',
     	'link' => 'active_url',
-    	'cnivel' => 'required',
-        'o_pago' => 'required',
-        'contra' => 'required'
+    	'nivel' => 'required|not_in:0',
+        'observaciones_pago' => 'required',
+        'contratista' => 'required',
+        'estado'=>'required|not_in:0'
     	]);
 
     	$cont = new contrato();
     	$user = \Auth::user();
 
-    	$cont->num_cto=  $request->input('Ncto');
-        $cont->contratista=  $request->input('contra');
-    	$cont->f_susc=  $request->input('f_susc');
+        
+        $con = contrato::all();
+        $last_id = $con->last();
+
+
+    	$cont->id=  $last_id->id+1;
+        $cont->num_cto=  $request->input('Numero_cto');
+        $cont->contratista=  $request->input('contratista');
+    	$cont->f_susc=  $request->input('fecha_suscripcion');
     	$cont->clase=  $request->input('clase');
-    	$cont->valor_mes=  $request->input('v_mes');
-    	$cont->valor_total=  $request->input('v_total');
-    	$cont->obs_pago=  $request->input('o_pago');
-    	$cont->cod_dep=  $request->input('depe');
+    	$cont->valor_mes=  $request->input('valor_mensual');
+    	$cont->valor_total=  $request->input('valor_total');
+    	$cont->obs_pago=  $request->input('observaciones_pago');
+    	$cont->cod_dep=  $request->input('dependencia');
     	$cont->plazo=  $request->input('plazo');
-    	$cont->f_ini=  $request->input('f_ini');
-    	$cont->f_fin=  $request->input('f_ter');
+    	$cont->f_ini=  $request->input('fecha_inicio');
+    	$cont->f_fin=  $request->input('fecha_terminacion');
     	$cont->link=  $request->input('link');
     	$cont->expediente=  $request->input('exp');
-    	$cont->supervisor=  $request->input('super');
+    	$cont->supervisor=  $request->input('supervisor');
     	$cont->estado=  $request->input('estado');
     	$cont->observaciones=  $request->input('obs');
-    	$cont->cod_proceso=  $request->input('cproceso');
+    	$cont->cod_proceso=  $request->input('numero_proceso');
     	$cont->cod_maa=  $request->input('cmaa');
-    	$cont->cod_nivel=  $request->input('cnivel');
+    	$cont->cod_nivel=  $request->input('nivel');
   
         DB::table('procesos')
             ->where('id_proceso', $request->input('cproceso'))
             ->update(['estado' => 200]);
 
         DB::table('personas')
-            ->where('documento', $request->input('contra'))
+            ->where('documento', $request->input('contratista'))
             ->update(['estado' => 20]);
 
     	$cont->save();
 
-    	return redirect()->route('home')->with(array(
+    	return redirect()->route('gestionarCon')->with(array(
     		'message' => 'El contrato se creó correctamente!!'
     	)); 
     }
@@ -176,7 +189,7 @@ class ContratoController extends Controller
 
         $sol->update();
 
-        return redirect()->route('home')->with(array('message'=>'El contrato se actualizó correctamente!!!'));
+        return redirect()->route('gestionarCon')->with(array('message'=>'El contrato se actualizó correctamente!!!'));
 
     }
 

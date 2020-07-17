@@ -20,7 +20,7 @@
                         </div>
                     @endif
                    
-                    <form method="GET" role="search" action="/buscarPer">
+                    <form method="GET" role="search" action="{{url('/buscarPer')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
@@ -38,7 +38,9 @@
                         </button>
                     </form>
                     <hr />
+                    @if(Auth::user()->role=='Admin'||Auth::user()->role=='Aper' )
                       <li><a href="{{url('/crear-persona')}}">Crear Contratista</a></li>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -59,6 +61,7 @@
                       </thead>
                       <tbody>
                         <div id="listado">
+                          @if(!is_null($rtas))
                           @foreach($rtas as $pro)                             
                             <tr>
                               <td class="text-center">{{ $pro->documento}}</td>
@@ -72,41 +75,16 @@
                                 @else
                                 Inactivo
                                 @endif
-                                </td>
-                  
-                              @if(Auth::user()->role == "Admin")
-                              <td class="text-center">
-                              <!-- Botón en HTML (lanza el modal en Bootstrap) -->
-                                  <a href="#victorModal{{$pro->documento}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
-                                    
-                                  <!-- Modal / Ventana / Overlay en HTML -->
-                                  <div id="victorModal{{$pro->documento}}" class="modal fade">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                  <h4 class="modal-title">¿Estás seguro?</h4>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar El proceso {{$pro->documento}}?</p>
-                                                  <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                 <a href="{{route('mostrarPer',['id'=>$pro->id_persona])}}" class="btn btn-outline-info">Ver</a></td>
-                              @else
+                                </td>            
                                 <td class="text-center">
-                                   <a href="{{route('mostrarPer',['id'=>$pro->id_persona])}}" class="btn btn-outline-info">Ver</a></td>
-                              @endif
+                                   <a href="{{route('mostrarPer',['id'=>$pro->id_persona])}}" class="btn btn-outline-info">Ver</a></td>   
 
                             </tr>
                           @endforeach
-                        </div>   
+                        </div> 
+                        @else
+                               <label>PARA EMPEZAR...INGRESE POR LA BUSQUEDA LOS DATOS DEL CONTRATISTA QUE VA A ASIGNAR AL CONTRATO</label>  
+                      @endif
                       </tbody>
                      
                     </table>
@@ -116,5 +94,8 @@
             </div>
         
     </div>    
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>
  </div>
 @endsection

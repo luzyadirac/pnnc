@@ -15,7 +15,13 @@ use Illuminate\Http\Request;
 class GarantiaController extends Controller
 {
     public function crearGarantia(){
-    	return view('gco.Ggarantia.crearGar');
+
+
+        $consulta = contrato::all();
+
+    	return view('gco.Ggarantia.crearGar',array(
+                 'rta'=>$consulta
+        ));
     }
 
     public function guardarGarantia(Request $request){
@@ -43,7 +49,7 @@ class GarantiaController extends Controller
     	    	
     	$per->save();
 
-    	return redirect()->route('home')->with(array(
+    	return redirect()->route('gestionarGar')->with(array(
     		'message' => 'La garantia se creó correctamente!!'
     	)); 
 
@@ -106,7 +112,18 @@ class GarantiaController extends Controller
 
         $sol->update();
 
-        return redirect()->route('home')->with(array('message'=>'La garantia se actualizó correctamente!!!'));
+        return redirect()->route('gestionarGar')->with(array('message'=>'La garantia se actualizó correctamente!!!'));
+
+    }
+
+    public function borraGar($id){
+        
+        $sol = garantia::find($id);
+        $user = \Auth::user();
+
+        $sol->delete();
+
+        return redirect()->route('gestionarGar')->with(array('message'=>'La garantía fue borrada correctamente!!!'));
 
     }
 }

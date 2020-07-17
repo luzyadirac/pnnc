@@ -17,22 +17,28 @@
 				</div>
 				@endif
 				<div class="form-group">
+					<label for="fuente">Contrato asociado es {{$rta}} </label>	
+					<input type="hidden" name="Contrato" value="{{$rta}}">	
+				</div>
+				<div class="form-group">
+					<label for="fuente">El saldo actual del contrato es : {{$saldo}}</label>
+					<input type="hidden" name="saldo_contrato" value="{{$saldo}}">
+		
+				</div>
+				<div class="form-group">
 					<label for="fuente">Fecha de pago</label>
-					<input type="date" class="form-control" id="fpago" name="fpago" value="{{old('fpago')}}"/>
+					<input type="date" class="form-control" id="fecha_pago" name="fecha_pago" value="{{old('fecha_pago')}}"/>
 				</div>
 				<div class="form-group">
 					<label for="valor">Valor pagado</label>
-					<input type="text" class="form-control" id="vpago" name="vpago" value="{{old('vpago')}}"  />	
+					<input type="text" class="form-control" id="valor_pagado" name="valor_pagado" value="{{old('valor_pagado')}}"  />	
 					</div>	
 				<div class="form-group">
-					<label for="dep">Valos saldo</label>
-					<input type="number" class="form-control" id="spago" name="spago" value="{{old('spago')}}" placeholder="Entero"/>
+					<label for="dep">Valor saldo</label>
+					<input type="number" class="form-control" id="saldo" name="saldo" value="{{old('saldo')}}" placeholder="Entero"/>
 				</div>
 
-				<div class="form-group">
-					<label for="fuente">Contrato asociado</label>
-					<input type="text" class="form-control" id="cpago" name="cpago" value="{{old('cpago')}}"/>
-				</div>
+
 				<div class="form-group">
 					<label for="dep">Observaciones</label>
 					<textarea class="form-control" id="obs" name="obs">{{old('obs')}} </textarea>

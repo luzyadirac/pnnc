@@ -38,7 +38,9 @@
                         </button>
                     </form>
                     <hr />
+                     @if(Auth::user()->role=='Admin'||Auth::user()->role=='Agar' )
                       <li><a href="{{url('/crear-garantia')}}">Crear Garantia</a></li>
+                      @endif
                   </div>
                 </div>
               </div>
@@ -86,7 +88,7 @@
                                               </div>
                                               <div class="modal-footer">
                                                   <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
+                                                  <a href="{{url('/borraGar/'.$pro->id_garantia)}}" type="button" class="btn-danger">Eliminar</a>
                                               </div>
                                           </div>
                                       </div>
@@ -108,6 +110,9 @@
                 </div>
             </div>
         
-    </div>    
+    </div>  
+         <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>  
  </div>
 @endsection

@@ -26,10 +26,10 @@ class solicitudcontroller extends Controller
     	//validar formulario
     	$validaInfo = $this->validate($request, [
     	'objeto' => 'required',
-    	'fuente' => 'required',
+    	'fuente' => 'required|not_in:0',
     	'valor' => 'required',
-    	'nsol' => 'required|min:4|unique:solicitudes,N_solCDP',
-    	'dep' => 'required'
+    	'Numero_solicitud' => 'required|min:4|unique:solicitudes,N_solCDP',
+    	'dependencia' => 'required|not_in:0'
     	]);
 
     	$sol = new solicitud();
@@ -37,17 +37,17 @@ class solicitudcontroller extends Controller
 
     	
 
-    	$sol->N_solCDP=  $request->input('nsol');
+    	$sol->N_solCDP=  $request->input('Numero_solicitud');
     	$sol->objeto =  $request->input('objeto');
     	$sol->valor = $request->input('valor');
     	$sol->fuente = $request->input('fuente');
     	$sol->n_radicado = $request->input('exp');
     	$sol->comentarios = $request->input('comentarios');
-    	$sol->cod_dep = $request->input('dep');
+    	$sol->cod_dep = $request->input('dependencia');
         $sol->estado = 1;
     	$sol->save();
 
-    	return redirect()->route('home')->with(array(
+    	return redirect()->route('gestionarCdp')->with(array(
     		'message' => 'La solicitud se creó correctamente!!'
     	)); 
 

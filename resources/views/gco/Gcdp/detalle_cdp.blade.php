@@ -28,7 +28,9 @@
  				    </ul>
 				  @endif
 					<div class="pull-rigth">
+						 @if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' || Auth::user()->role=='Ages')
 						<a href="{{route('editC',['id'=>$rta->id_cdp])}}" class="btn btn-info">Editar</a>
+						@endif
 						<a href="{{url('/gestionar-cdp')}}" class="btn btn-primary">volver</a>
 					</div>
 				</div>

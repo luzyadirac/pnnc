@@ -19,14 +19,14 @@
                         </div>
                     @endif
                    
-                    <form method="GET" role="search" action="/buscarPer2">
+                    <form method="GET" role="search" action="{{url('/buscarPer2')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
                             <select name="criterio">
                               <option value="documento">Numero de documento</option>
                               <option value="Apellidos">Apellidos</option>
-                              <option value="correo_I">Correo institucional</option>
+                              <option value="profesion">Profesión</option>
                             </select>
                           </span>
                           <hr />
@@ -43,6 +43,7 @@
               </div>
 
             <div class="col-md-9">
+              @if(isset($resultado))
             <div class="card" >
                 <div class="card-header">Contratistas Encontrados</div>
                   <div class="card-body">
@@ -51,24 +52,24 @@
                         <tr>                        
                             <th class="text-center">Documento de Contratista</th>
                             <th class="text-center">Nombres</th>
-                            <th class="text-center">Correo institucional</th>
+                            <th class="text-center">Apellidos</th>
                             <th class="text-center">Profesión</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
                         <div id="listado">
-                          @if(isset($resultado))
+                          
                           @foreach($resultado as $result)
                             <tr>
                               <td class="text-center">{{$result->documento}}</td>
                               <td class="text-center">{{ $result->Nombres}}</td>
-                              <td class="text-center">{{ $result->correo_I}}</td>
+                              <td class="text-center">{{ $result->Apellidos}}</td>
                               <td class="text-center">{{ $result->profesion  }}</td>
                               <td><a href="{{route('crearContrato',['id'=>$result->documento])}}" class="btn btn-outline-info">Seleccionar</a></td>
                             </tr>
                           @endforeach
-                          @endif
+                         
                         </div>   
                       </tbody>
                            
@@ -76,6 +77,9 @@
                       </table>
                   </div>
                 </div>
+                @else
+                Para empezar, ingrese un criterio de búsqueda sobre el contratista que desea ingresar
+                @endif
             </div>
         
     </div>    

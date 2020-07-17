@@ -19,20 +19,26 @@
 					    <li class="list-group-item">Correo Personal: {{$solicitud->correo_p}}</li>
 					    <li class="list-group-item">Correo Institucional:{{$solicitud->correo_I}}</li>
 					    <li class="list-group-item">Estado: 
-								@if($solicitud->estado == 10)
+					    	@if($solicitud->clase == 'Contratista')
+								@if($solicitud->estado == 10 )
                                 Sin asignar Contrato 
-                                @elseif($solicitud->estado == 20)
+                                @elseif($solicitud->estado == 20 )
                                 Con contrato Vigente
                                 <a href="{{route('mostrarPerC',['id'=>$solicitud->documento])}}" class="btn btn-outline-info">Ver Contrato</a>
                                 @else
                                 Inactivo
                                 @endif
+                            @else
+                            Funcionario
+                            @endif
 					    </li>
 					      <li class="list-group-item">Link:{{$solicitud->link}}</li>
  				    </ul>
 				  @endif
 					<div class="pull-rigth">
+						 @if(Auth::user()->role=='Admin'||Auth::user()->role=='Aper'|| Auth::user()->role=='Ages' )
 						<a href="{{route('editPer',['id'=>$solicitud->documento])}}" class="btn btn-info">Editar</a>
+						@endif
 						<a href="{{url('/gestionar-persona')}}" class="btn btn-primary">volver</a>
 					</div>
 				</div>

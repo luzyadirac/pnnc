@@ -24,13 +24,15 @@
 					    </li>
 					    <li class="list-group-item">Valor: {{$solicitud->Valor}} </li>
 					    <li class="list-group-item">Expediente: {{$solicitud->N_radicado}}</li>
-					    <li class="list-group-item">Dependencia:{{$solicitud->depen->nombre}}</li>
+					    <li class="list-group-item">Dependencia:{{$solicitud->cod_dep}}</li>
 					    <li class="list-group-item">Estado: 
 					    	@if($solicitud->estado == 1)
 					    	Sin Asignar a CDP
-					    	<div class="pull-rigth">
-					    		<a href="{{route('crearCdp',['ident'=>$solicitud->N_solCDP])}}">Crear CDP</a></li>
-					    	</div>
+					    	 	@if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' || Auth::user()->role=='Ages' )
+					    			<div class="pull-rigth">
+					    				<a href="{{route('crearCdp',['ident'=>$solicitud->N_solCDP])}}">Crear CDP</a></li>
+					    			</div>
+					    		@endif
 					    	@else
 					    	con CDP asignado
 					    	@endif
@@ -39,7 +41,9 @@
  				    </ul>
 				  @endif
 					<div class="pull-rigth">
+						@if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' || Auth::user()->role=='Ages' )
 						<a href="{{route('editS',['id_sol'=>$solicitud->N_solCDP])}}" class="btn btn-info">Editar</a>
+						@endif
 						<a href="{{url('/gestionar-cdp')}}" class="btn btn-primary">volver</a>
 					</div>
 				</div>

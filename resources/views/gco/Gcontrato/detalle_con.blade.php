@@ -62,7 +62,9 @@
  				    </ul>
 				  @endif
 					<div class="pull-rigth">
+						 @if(Auth::user()->role=='Admin'||Auth::user()->role=='Ages' )
 						<a href="{{route('editCon',['id'=>$solicitud->num_cto])}}" class="btn btn-info">Editar</a>
+						@endif
 						<a href="{{url('/gestionar-contrato')}}" class="btn btn-primary">volver</a>
 					</div>
 				</div>

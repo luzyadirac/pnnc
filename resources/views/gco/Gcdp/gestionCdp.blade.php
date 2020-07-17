@@ -20,7 +20,7 @@
                         </div>
                     @endif
                    
-                    <form method="GET" role="search" action="/buscarS">
+                    <form method="GET" role="search" action="{{url('/buscarS')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
@@ -31,20 +31,22 @@
                             </select>
                           </span>
                           <hr />
-                          <input type="text" class="form-control" placeholder="qué quieres ver?" name="search">
+                          <input type="text" class="form-control" placeholder="ingrese parte del contenido buscado" name="search">
                         </div>
                         <button type="submit" class="btn btn-default">
                          Buscar
                         </button>
                     </form>
                     <hr />
+                     @if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' )
                       <li><a href="{{url('/crear-solicitud')}}">Crear Solicitud</a></li>
+                      @endif
                   </div>
                 </div>
               </div>
             <div class="col-md-9">
             <div class="card" >
-                <div class="card-header">Solicitudes sin asignar</div>
+                <div class="card-header">Solicitudes sin CDP asignado</div>
                   <div class="card-body">
                     <table class="table table-bordered" id="tableSolicitudes">
                       <thead>
@@ -52,6 +54,7 @@
                             <th class="text-center">Numero de solicitud</th>
                             <th class="text-center">Fuente</th>
                             <th class="text-center">Dependencia</th>
+                             <th class="text-center">Fecha de actualización</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                       </thead>
@@ -68,36 +71,10 @@
                                 <td class="text-center">Nación</td>
                               @endif
                               <td class="text-center">{{ $solicitud->cod_dep}}</td>
-                              @if(Auth::user()->role == "Admin")
-                              <td class="text-center">
-                              <!-- Botón en HTML (lanza el modal en Bootstrap) -->
-                                  <a href="#victorModal{{$solicitud->N_solCDP}}" role="button" class="btn btn-sm btn-primary" data-toggle="modal">Eliminar</a>
-                                    
-                                  <!-- Modal / Ventana / Overlay en HTML -->
-                                  <div id="victorModal{{$solicitud->N_solCDP}}" class="modal fade">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content">
-                                              <div class="modal-header">
-                                                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                  <h4 class="modal-title">¿Estás seguro?</h4>
-                                              </div>
-                                              <div class="modal-body">
-                                                  <p>¿Seguro que quieres borrar la solicitud {{$solicitud->N_solCDP}}?</p>
-                                                  <p class="text-warning"><small>Si lo borras, nunca podrás recuperarlo.</small></p>
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                                  <button type="button" class="btn btn-danger">Eliminar</button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                                 <a href="{{route('mostrarS',['id_sol'=>$solicitud->N_solCDP])}}" class="btn btn-outline-info">Ver</td>
-                              @else
-                                <td class="text-center">
+                              <td class="text-center">{{ $solicitud->created_at}}</td>
+                             <td class="text-center">
                                    <a href="{{route('mostrarS',['id_sol'=>$solicitud->N_solCDP])}}" class="btn btn-outline-info">Ver</td>
-                              @endif
-
+                            
                             </tr>
                           @endforeach
                         </div>   
@@ -113,24 +90,28 @@
                     </table>
                     {{$solicitudes->links()}}
                   </div>
+                 
                 </div>
             </div>
         
     </div>
+     <div class="pull_rigth col-md-12">
+                   <a href="{{url('/home')}}" class="btn btn-info">Página principal</a>
+                 </div>
           <br>
     <div class="row justify-content-around">
         <div class="col-md-3">
             <div class="card ">
                 <div class="card-header">Buscar CDP</div>
                   <div class="card-body">
-                   <form method="GET" role="search" action="/buscarC">
+                   <form method="GET" role="search" action="{{url('/buscarC')}}">
                         <div class="form-group">
                           <span>
                             <label>Buscar por:</label>
                             <select name="criterio">
                               <option value="id_cdp">Numero de CDP</option>
-                              <option value="observaciones">otro</option>
-                              <option value="Objeto">otro</option>
+                              <option value="observaciones">Observaciones</option>
+                              <option value="fecha">Fecha</option>
                             </select>
                           </span>
                           <hr />
@@ -141,13 +122,15 @@
                         </button>
                     </form>
                     <hr />
-                      <li><a href="{{url('/crear-cdp')}}">Crear CDP</a></li>
+                     @if(Auth::user()->role=='Admin'||Auth::user()->role=='Afin' )
+                      <li><a href="{{route('crearCdp',null)}}">Crear CDP</a></li>
+                      @endif
                   </div>
                 </div>
             </div>
         <div class="col-md-9">            
             <div class="card " >
-                <div class="card-header">Los últimos CDP's registrados</div>
+                <div class="card-header">Los últimos CDP's registrados y asignados a proceso</div>
                   <div class="card-body">
                     <table class="table table-bordered" id="tableSolicitudes">
                       <thead>
@@ -155,6 +138,7 @@
                             <th class="text-center">Numero de CDP</th>
                             <th class="text-center">Fecha</th>
                             <th class="text-center">Numero de solicitud</th>
+                            <th class="text-center">Proceso asignado</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                       </thead>
@@ -166,6 +150,7 @@
                               <td class="text-center">{{$cert->id_cdp}}</td>
                               <td class="text-center">{{ $cert->fecha}}</td>
                               <td class="text-center">{{ $cert->cod_solicitud}}</td>
+                               <td class="text-center">{{ $cert->num_proceso}}</td>
                               <td class="text-center"><a href="{{route('mostrarC',['id'=>$cert->id_cdp])}}" class="btn btn-outline-info">Ver</a></td>
                             </tr>
                           @endforeach
@@ -176,6 +161,7 @@
                           <th class="text-center">Numero de CDP</th>
                           <th class="text-center">Fecha</th>
                           <th class="text-center">Numero de solicitud</th>
+                          <th class="text-center">Proceso asignado</th>
                           <th class="text-center">Acciones</th>
                         </tr>
                       </tfoot>
